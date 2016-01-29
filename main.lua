@@ -16,7 +16,9 @@ local function onTouch(event)
 
 		if r.isWhite then
 
-			r.alpha = 1
+			print("imwhite")
+
+			r:setFillColor( 1 )
 		end
 	end
 end
@@ -51,7 +53,7 @@ for i = 1, 4 do
 
 			if self.g <= 0 then
 
-				self:removeEventListener( "enterFrame", onEnterFrame )
+				Runtime:removeEventListener( "enterFrame", self )
 			end
 		end
 
