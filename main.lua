@@ -12,13 +12,10 @@ local function onTouch(event)
 	local r = event.target
 
 	if event.phase == "began" then
-		print(r.isWhite)
 
-		if r.isWhite then
+		if r.whiteR then
 
-			print("imwhite")
-
-			r:setFillColor( 1 )
+			r.whiteR.alpha = 1
 		end
 	end
 end
@@ -43,31 +40,16 @@ for i = 1, 4 do
 
 		r:addEventListener( "touch", onTouch )
 
-		function r:enterFrame()
-			local speed = 0.03
-
-			self:setFillColor(1, self.g, self.b)
-
-			self.g = self.g - speed
-			self.b = self.b - speed
-
-			if self.g <= 0 then
-
-				Runtime:removeEventListener( "enterFrame", self )
-			end
-		end
 
 		if math.random() > 0.9 then
-			r:setFillColor( 1 )
-			r.isWhite = true
+			local whiteR = display.newRect( group, x, y, SIZE, SIZE )
+			whiteR.anchorX = 0
+			whiteR.anchorY = 0
 
-			r.g = 1
-			r.b = 1
+			transition.to( whiteR, {time = 2000, alpha = 0} )
 
-			Runtime:addEventListener( "enterFrame", r )
-
+			r.whiteR = whiteR
 		end
-
 	end
 end
 
